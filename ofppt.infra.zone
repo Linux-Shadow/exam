@@ -1,0 +1,39 @@
+$ORIGIN ofppt.infra.
+$TTL 3600
+
+@       IN      SOA     srv1.ofppt.infra. admin.ofppt.infra. (
+                    2024113001     ; Serial
+                    3600           ; Refresh (1 hour)
+                    900            ; Retry (15 minutes)
+                    1209600        ; Expire (2 weeks)
+                    3600           ; Minimum TTL (1 hour)
+                    )
+        IN      NS      srv1.ofppt.infra.
+        IN      NS      srv2.ofppt.infra.
+        IN      NS      srv3.ofppt.infra.
+        IN      NS      srv4.ofppt.infra.
+        IN      NS      srv5.ofppt.infra.
+
+; Name servers
+srv1    IN      A       10.10.10.2     ; Primary DNS server
+srv2    IN      A       10.10.10.3     ; Secondary DNS server
+srv3    IN      A       10.10.10.4     ; Tertiary DNS server
+srv4    IN      A       10.10.10.5     ; Quaternary DNS server
+srv5    IN      A       172.16.20.8    ; Quinary DNS server
+
+; Services
+www     IN      CNAME       srv2.ofppt.infra.     ; Web server
+smb     IN      CNAME       srv1.ofppt.infra.     ; SMB service
+ftp     IN      CNAME       srv5.ofppt.infra.     ; FTP service
+
+; Mail servers
+mail1   IN      A       10.10.10.2     ; Primary Mail Server
+mail2   IN      A       10.10.10.3     ; Secondary Mail Server
+
+; Mail exchanger records
+@       IN      MX      10 mail1.ofppt.infra.
+@       IN      MX      20 mail2.ofppt.infra.
+
+; LDAP SRV records
+_ldap._tcp      IN      SRV     0 60 389 srv1.ofppt.infra.
+_ldap._tcp      IN      SRV     0 40 389 srv3.ofppt.infra.
